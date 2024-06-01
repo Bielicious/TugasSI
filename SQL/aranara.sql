@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 27, 2024 at 11:09 AM
+-- Generation Time: Jun 01, 2024 at 11:22 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `ID_Admin` int NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `No_HP` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `barang`
 --
 
@@ -34,6 +47,19 @@ CREATE TABLE `barang` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `ID_Customer` int NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `No_HP` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -50,6 +76,32 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gudang`
+--
+
+CREATE TABLE `gudang` (
+  `ID_Gudang` int NOT NULL,
+  `Jenis_Gudang` varchar(50) NOT NULL,
+  `No_Gudang` int NOT NULL,
+  `Daya_Tampung` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jadwal`
+--
+
+CREATE TABLE `jadwal` (
+  `ID_Jadwal` int NOT NULL,
+  `Tanggal` date NOT NULL,
+  `Lokasi_Tujuan` varchar(50) NOT NULL,
+  `Status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -74,6 +126,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2024_05_24_191751_create_pegawais_table', 1),
 (6, '2024_05_25_043559_create_barangs_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outlet`
+--
+
+CREATE TABLE `outlet` (
+  `ID_Outlet` int NOT NULL,
+  `Nama` int NOT NULL,
+  `Alamat` int NOT NULL,
+  `No_HP` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -116,6 +181,18 @@ INSERT INTO `pegawai` (`nama`, `alamat`, `notelp`, `divisi`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pengiriman`
+--
+
+CREATE TABLE `pengiriman` (
+  `ID_Pengiriman` int NOT NULL,
+  `Jenis_Kendaraan` varchar(50) NOT NULL,
+  `Berat_Muatan` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `personal_access_tokens`
 --
 
@@ -131,6 +208,31 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rute`
+--
+
+CREATE TABLE `rute` (
+  `ID_Rute` int NOT NULL,
+  `Alur` varchar(50) NOT NULL,
+  `Jarak` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supir`
+--
+
+CREATE TABLE `supir` (
+  `ID_Supir` int NOT NULL,
+  `Nama` varchar(50) NOT NULL,
+  `Alamat` varchar(50) NOT NULL,
+  `No_HP` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -154,11 +256,35 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`ID_Admin`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`ID_Customer`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `gudang`
+--
+ALTER TABLE `gudang`
+  ADD PRIMARY KEY (`ID_Gudang`);
+
+--
+-- Indexes for table `jadwal`
+--
+ALTER TABLE `jadwal`
+  ADD PRIMARY KEY (`ID_Jadwal`);
 
 --
 -- Indexes for table `migrations`
@@ -173,12 +299,24 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `pengiriman`
+--
+ALTER TABLE `pengiriman`
+  ADD PRIMARY KEY (`ID_Pengiriman`);
+
+--
 -- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `supir`
+--
+ALTER TABLE `supir`
+  ADD PRIMARY KEY (`ID_Supir`);
 
 --
 -- Indexes for table `users`
